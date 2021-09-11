@@ -2,7 +2,7 @@
 This is a repository for academic purposes that contains the tools requred to simulate general nonrelatevistic kinematics using the pytorch framework for multiprocessing and sympy and numpy for the symbolic function representations and number crunching respectivly.
 
 # High level description
-This is a simulation of a baseball thrown at 44.7m/s at an angle of pi on 4 with both the xy and xz axis. This model uses a　first order (velocity based) non-linear quadratic drag model in velocity to simulate air resistance as well, with a link to the page I found regulation baseball-ball stats on. 
+This is a simulation of a baseball thrown at 44.7m/s at an angle of pi on 4 with both the xy and xz axis. This model uses a first order (velocity based) non-linear quadratic drag model in velocity to simulate air resistance as well, with a link to the page I found regulation baseball-ball stats on. 
 
 # Running instructions
 
