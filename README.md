@@ -16,4 +16,4 @@ The file that actually runs the simulation is located in <project directory>/ipy
   
 The files under Py_files are where all the magic happens! For the most part, it is just levraging multiprocessing to speed up multibody simulations or simulations with a large number of independant variables (high dimensionality). These files are mostly commented, and contain no "special sauce magic code." All relavent code is contained in these files for review.
   
-If you encounter any bugs besides the currently known bug with chained simulations (IE: running an Euler sim, then immediatly running an Euler_Cromer without restarting the program causes old data to be reused), please let me know! Thank you and cheers!
+If you encounter any bugs sans the currently known bug with chained simulations (IE: running an Euler sim, then immediatly running an Euler_Cromer without restarting the program causes old data to be reused), please let me know! Thank you and cheers!
