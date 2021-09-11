@@ -19,18 +19,6 @@ def PrintException():
     line = linecache.getline(filename, lineno, f.f_globals)
     print('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
 
-class var_type:
-    def __init__(self, var, *args, opt=None):
-        if opt == None:
-            self.dependant_var = False
-        else:
-            self.dependant_var = True
-        self.var_name = var # or key val maybe? idk.
-        
-    def dependant_eval(self, var):
-        '''This function needs to determine if a variable is a derivative of another variable, and pass the proper terms
-        to be evaluated.'''
-        pass
 
 class Integrator:
     '''
@@ -70,7 +58,7 @@ class Integrator:
                 self.scale_factor = int(1)
             else:
                 self.scale_factor = mult
-            self.out_list = torch.zeros((int(self.sim_time/self.sub_time),self.eval_func.get_all_var()))
+            self.out_list = torch.zeros((int(self.sim_time/self.sub_time),self.eval_func.get_dim()))
 
             self.y_0  = torch.zeros(eval_func.get_dim())
             self.y_1  = torch.zeros(eval_func.get_dim())
@@ -94,9 +82,17 @@ class Integrator:
             PrintException()
     
     def collect_args(self):
-        for item in self.diff_list:
-            self.force_input[item[0]] = self.dy_0[item[0]]
-        return
+        try:
+            var_dim_diff_size = self.eval_func.get_all_var()-self.eval_func.get_dim()
+            for i in range(var_dim_diff_size):
+                self.force_input[i] = self.y_0[i]
+            for item in self.diff_list:
+                index = item[0] - var_dim_diff_size
+                self.force_input[index] = self.dy_0[index]
+        except Exception as e:
+            print("Error in collect_args method!")
+            PrintException()
+            sys.exit()
 
     def Euler(self, check_val = None):
         '''

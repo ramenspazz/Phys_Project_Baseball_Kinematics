@@ -38,20 +38,16 @@ class nDim_Symbolic_Function:
             # this is limited right now to a rank 1 tensor that can be embeded into a R^n vector-space
             self.dim = len(self.expr) # the dimension of the function, IE f is a member of R^2 or a member of R^9001 
             self.variable_list = variable_list # this stores the list of variables to be used in the function
-
-            self.in_args = [i for i in range(self.dim)] # this enumerates the absolute order of the variable in the evaluation list
+            self.in_args = [i for i in range(len(self.variable_list))] # this enumerates the absolute order of the variable in the evaluation list
             # IE: f such that R^5 -> R^5 where a,b,x,z,p belong to R; therefore f(a,b,x,z,p) maps to R^5 and "a" has the absolute position in
             # the evaluation list of f as 0, b as 1, x as 2, z as 3, and p as 4 
              
             self.results = [{} for x in self.in_args] # assign an empty set to each function output, this is kept as an empty set so
             # that tensors of rank 2 or more can be evaluated at a later version of this module
-
             self.vars = {variable: 0 for variable in all_vars} # set the variable as a key into a dictionary with an initial value of 0
             self.var_dict = {i: self.variable_list[i] for i in range(self.dim)} # link each variable to a enumeratable key value instead of the name
             # IE: {a: 1, b: 2, c: 3} allows f to be evaluated by positional arguments f(1,2,3) and calls the values from self.vars
             
-            self.diff_dict = {} 
-
             self.lambda_expr = [lambdastr(self.variable_list[i], self.expr[key]) for i, key in enumerate(self.var_dict)] # c style lambda function for
             # quicker evaluation of mathematical functions over pure python evaluation. Makes use of cython or direct evaluation of static bytecode
 
@@ -59,7 +55,7 @@ class nDim_Symbolic_Function:
         except Exception as e:
             print('Error in Symbolic Function module : __init__.\n{}'.format(e))
             PrintException()
-            exit()
+            
 
     def contains_derivative(self):
         diff_list = []
@@ -107,7 +103,7 @@ class nDim_Symbolic_Function:
         except Exception as e:
             print('Error in Symbolic Function module : evaluate.')
             PrintException()
-            exit()
+            
 
     def magnitude(self, *args): # R^2 norm
         temp = self.evaluate(*args)
@@ -121,11 +117,11 @@ class nDim_Symbolic_Function:
             if key_val in self.vars:
                 self.vars[key_val] = val
             else:
-                raise ValueError("Key {} does not exist in the varible dictonary!\n") 
+                raise ValueError(f"Key {key_val} does not exist in the varible dictonary!\n") 
         except Exception as e:
             print("Error in Symbolic Function module : set_var.")
             PrintException()
-            exit()
+            
 
     def initial_conditions(self, *args):
         try:
@@ -135,7 +131,7 @@ class nDim_Symbolic_Function:
         except Exception as e:
             print("Error in Symbolic Function module : initial_conditions.")
             PrintException()
-            exit()
+            
 
     def get_all_var_as_list(self):
         return [(i,val) for i, val in enumerate(self.vars)]
@@ -151,3 +147,4 @@ class nDim_Symbolic_Function:
     
     def get_dim(self):
         return(self.dim)
+            
