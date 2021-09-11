@@ -3,6 +3,8 @@ This is a repository for academic purposes that contains the tools requred to si
 
 Included with this repo at the top level is a YML file that can be used to clone my anaconda enviroment used to run this project. You can use jupyter notebooks, but it is much faster to use Microsoft© Visual Studio Code and install the jupyter notebook tools (it should automatically prompt you to install them when you open an ipynb file). The YML file can be installed by running the command:
 
+```BASH
 conda env create -f enviroment.yml
+```
 
 Cheers!
