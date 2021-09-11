@@ -101,6 +101,9 @@ class Integrator:
         Initial conditions are passed from lowest order to highest order terms, IE: x1, x2, ..., xm, x'1, x'2, ... , d^(n)xm/dq
         '''
         try:
+            # Eulers method is a itterative series of locally affine linear approximations to the curve that are computed from a set of initial
+            # conditions that tell where in phase space we are, then use the affine linear approximations to give a tangent line that connects us to
+            # the next point to be computed in an itterative manor.
             # begin computing Euler
             count = 0
             print("Euler method...")
@@ -137,6 +140,8 @@ class Integrator:
         Initial conditions are passed from lowest order to highest order terms, IE: x1, x2, ..., xm, x'1, x'2, ... , d^(n)xm/dq
         '''
         try:
+            # If the Euler method is pretty much a straight foward application of itterative discrete steps, the Euler Cromer method is the same process
+            # with the step shifted foward by one index in t, computing v_n+1 instead of v_n for each step.
             # begin computing Euler-Cromer
             count = 0
             print("Euler-Cromer method...")
@@ -181,6 +186,9 @@ class Integrator:
         if check_val = True **kwarg passed, enable verbose loop information
         '''
         try:
+            # in essence, this is a convoluted simpsons method that takes samples the slope at the end points, and two mid points of an interval 
+            # then computes a weighted average based on this that gives the weighted slope and then adds the newly computed deltas to the previous generation
+            # of position and velocity data. Not really magic and just straight foward math.
             # setup initial conditions for the k and l variables that fit to RK4
             k1 = torch.zeros(self.eval_func.get_all_var())
             k2 = torch.zeros(self.eval_func.get_all_var())
