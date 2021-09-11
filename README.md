@@ -1,6 +1,11 @@
 # Baseball simulation
 This is a repository for academic purposes that contains the tools requred to simulate general nonrelatevistic kinematics using the pytorch framework for multiprocessing and sympy and numpy for the symbolic function representations and number crunching respectivly.
 
+# High level description
+This is a simulation of a baseball thrown at 44.7m/s at an angle of pi on 4 with both the xy and xz axis. This model uses a second order quadratic drag model in velocity to simulate air resistance as well, with a link to the page I found regulation baseball-ball stats on. 
+
+# Running instructions
+
 Included with this repo at the top level is a YML file that can be used to clone my anaconda enviroment used to run this project. You can use jupyter notebooks, but it is much faster to use Microsoft© Visual Studio Code and install the jupyter notebook tools (it should automatically prompt you to install them when you open an ipynb file). The YML file can be installed by running the command:
 
 ```BASH
