@@ -6,6 +6,11 @@ Included with this repo at the top level is a YML file that can be used to clone
 ```BASH
 conda env create -f enviroment.yml
 ```
+Next, cd (set your current working directoy) to the location you would like to place the project files, then clone the github enviroment with the command (requires the git toolchain):
+
+```BASH
+git clone https://github.com/ramenspazz/Phys_Project_Baseball_Kinematics
+```
 
 The file that actually runs the simulation is located in <project directory>/ipynb_files/baseball.ipynb
   
