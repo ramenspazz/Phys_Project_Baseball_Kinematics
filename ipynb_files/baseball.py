@@ -66,12 +66,15 @@ output_time_step = 1 # second
 
 # initial conditions
 # We throw the baseball such that we can see it has proper behavior in 3D, it is thrown at a pi/4 angle from the xy plane and at a pi/4 angle from the xz plane.
-Vx = 45*np.cos(np.pi/4)*np.sin(np.pi/4)
-Vy = 45*np.sin(np.pi/4)**2
-Vz = 45*np.sin(np.pi/4)
+V_mag = 44.7 # m/s <=> 100mph
+theta = np.pi/4
+phi = np.pi/3
+Vx = V_mag*np.cos(theta)*np.sin(phi)
+Vy = V_mag*np.sin(theta)*np.sin(phi)
+Vz = V_mag*np.cos(phi)
 x_0 = 0
 y_0 = 0
-z_0 = 2 # meters. 2 meters is close enough to 6 feet. Eew american freedom units lol
+z_0 = 1.8288 # meters. Eew american freedom units make messy numbers lol
 
 print(f'The initial speed is {np.sqrt(Vx**2+Vy**2+Vz**2)} meters per second')
 
