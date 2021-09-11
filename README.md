@@ -8,5 +8,7 @@ conda env create -f enviroment.yml
 ```
 
 The file that actually runs the simulation is located in <project directory>/ipynb_files/baseball.ipynb
+  
+The files under Py_files are where all the magic happens! For the most part, it is just levraging multiprocessing to speed up multibody simulations or simulations with a large number of independant variables (high dimensionality). These files are mostly commented, and contain no "special sauce magic code." All relavent code is contained in these files for review.
 
 Cheers!
