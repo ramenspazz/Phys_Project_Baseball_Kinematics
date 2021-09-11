@@ -1,0 +1,2 @@
+# Numeric integration library files
+This folder contains two files, nDim_Symbolic_Function.py and Integrator.py. nDim_Symbolic_Function is a general framework for a function in R^n space with an arbitrary number of inputs to the function. The Integrator is self explanitory and contains three numeric integration methods that can be applied to nonrelatevistic simulations using Newtons laws of Kinematics. 
