@@ -7,4 +7,6 @@ Included with this repo at the top level is a YML file that can be used to clone
 conda env create -f enviroment.yml
 ```
 
+The file that actually runs the simulation is located in <project directory>/ipynb_files/baseball.ipynb
+
 Cheers!
