@@ -82,6 +82,11 @@ z_0 = 1.8288 # meters. Eew american freedom units make messy numbers lol
 
 print(f'The initial speed is {np.sqrt(Vx**2+Vy**2+Vz**2)} meters per second')
 
+# I am working on making the simulation and plotting self contained in the integrator class so that only 
+# the line/s(?) numInt.Integrator(*args) is required between runs; working on object cleanup now
+
+# For now, This solves the issue with repeated runs but it looks really ugly, we can do better!
+
 F = numInt.Integrator(F_,0,real_time,output_time_step,dt,x_0,y_0,z_0,Vx,Vy,Vz)
 
 fig, ax = plt.subplots(1,2,constrained_layout=True)
@@ -90,5 +95,16 @@ ax = plt.axes(projection ='3d')
 plot_vals_1 = F.Euler_Cromer(check_val=True) # this line can be changed to F.Euler, F.Euler_Cromer, or F.RK4 to test the different methods if you so wish
 ax.plot3D(plot_vals_1[:,0], plot_vals_1[:,1], plot_vals_1[:,2], 'green')
 plt.show()
+del plot_vals_1
+del F
 
+F = numInt.Integrator(F_,0,real_time,output_time_step,dt,x_0,y_0,z_0,Vx,Vy,Vz)
+
+fig, ax = plt.subplots(1,2,constrained_layout=True)
+ax = plt.axes(projection ='3d')
+
+plot_vals_1 = F.RK4(check_val=True) # this line can be changed to F.Euler, F.Euler_Cromer, or F.RK4 to test the different methods if you so wish
+ax.plot3D(plot_vals_1[:,0], plot_vals_1[:,1], plot_vals_1[:,2], 'green')
+plt.show()
+del plot_vals_1
 del F
