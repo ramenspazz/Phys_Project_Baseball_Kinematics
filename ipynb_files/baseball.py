@@ -88,7 +88,6 @@ print(f'The initial speed is {np.sqrt(Vx**2+Vy**2+Vz**2)} meters per second')
 # This is mostly self contained right now, but needs to be reinstantized each time.
 # The __del__ method in python is much more finicky than C++ destructors and a bit of a mystery to me :(
 
-# F.sim_and_plot(arg) is the plotting function and takes an integer 1, 2 or 3. 1 corresponds to Euler, 2 to Euler-Cromer, 3 to Runge Kutta 4.
 F = numInt.Integrator(F_,0,real_time,output_time_step,dt,x_0,y_0,z_0,Vx,Vy,Vz)
 F.sim_and_plot(3)
 del F
