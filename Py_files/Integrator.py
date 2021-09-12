@@ -1,6 +1,7 @@
 # TODO : write docstrings and code explinations ;P
 from __future__ import division
 from sympy.utilities.lambdify import lambdastr
+import matplotlib.pyplot as plt
 from datetime import datetime
 import nDim_Symbolic_Function
 import torch
@@ -99,10 +100,49 @@ class Integrator:
         sys.stdout.write('Done!\n')
         return
 
-    def sim_and_plot(self):
-        fig, ax = plt.subplots(1,2,constrained_layout=True)
-        ax = plt.axes(projection ='3d')
-        
+    def sim_and_plot(self, function_select):
+        try:
+            if isinstance(function_select, int):
+
+                fig, ax = plt.subplots(1,2,constrained_layout=True)
+                ax = plt.axes(projection ='3d')
+
+                if int(function_select) == 1:
+                    plot_vals = self.Euler(check_val=True)
+                elif int(function_select) == 2:
+                    plot_vals = self.Euler_Cromer(check_val=True)
+                elif int(function_select) == 3:
+                    plot_vals = self.RK4(check_val=True)
+
+                ax.plot3D(plot_vals[:,0], plot_vals[:,1], plot_vals[:,2], 'green')
+
+                plt.show()
+                del plot_vals
+
+        except Exception as e:
+            PrintException()
+        # finally:
+        #     print('done!')
+        #     return
+
+    def __del__(self):
+        sys.stdout.write('cleaning...\n')
+        # del self.y_0
+        # del self.y_1
+        # del self.dy_0
+        # del self.dy_1
+        # del self.sub_time
+        # del self.sim_time
+        # del self.dt
+        # del self.diff_list
+        # del self.scale_factor
+        # del self.output_step
+        # del self.virtual_range_size
+        # del self.force_input
+        # del self.trim_
+        del self
+        sys.stdout.write('Done!\n')
+
     def collect_args(self):
         try:
             var_dim_diff_size = self.eval_func.get_all_var()-self.eval_func.get_dim()
