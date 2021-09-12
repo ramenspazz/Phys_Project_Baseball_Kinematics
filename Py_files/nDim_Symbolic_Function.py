@@ -44,23 +44,27 @@ class nDim_Symbolic_Function:
              
             self.results = [{} for x in self.in_args] # assign an empty set to each function output, this is kept as an empty set so
             # that tensors of rank 2 or more can be evaluated at a later version of this module
+
             self.vars = {variable: 0 for variable in all_vars} # set the variable as a key into a dictionary with an initial value of 0
             self.var_dict = {i: self.variable_list[i] for i in range(self.dim)} # link each variable to a enumeratable key value instead of the name
             # IE: {a: 1, b: 2, c: 3} allows f to be evaluated by positional arguments f(1,2,3) and calls the values from self.vars
             
-            self.lambda_expr = [lambdastr(self.variable_list[i], self.expr[key]) for i, key in enumerate(self.var_dict)] # c style lambda function for
-            # quicker evaluation of mathematical functions over pure python evaluation. Makes use of cython or direct evaluation of static bytecode
+            # c style lambda function for quicker evaluation of mathematical functions over pure python evaluation. 
+            self.lambda_expr = [lambdastr(self.variable_list[i], self.expr[key]) for i, key in enumerate(self.var_dict)]
 
             return
         except Exception as e:
             print('Error in Symbolic Function module : __init__.\n{}'.format(e))
             PrintException()
-            
+    
+    def cleanup(self):
+        sys.stdout.write('TODO : cleanup...\n')
+        return
 
     def contains_derivative(self):
         diff_list = []
         for i, var in enumerate(self.vars):
-            if var.atoms(sym.Derivative) != set(): # atoms can check for sympy types in expression
+            if var.atoms(sym.Derivative) != set(): # atoms can check for sympy types in expression, here we check for 1st order and higher terms
                 diff_list.append((i,var))
         return diff_list
 
@@ -103,7 +107,6 @@ class nDim_Symbolic_Function:
         except Exception as e:
             print('Error in Symbolic Function module : evaluate.')
             PrintException()
-            
 
     def magnitude(self, *args): # R^2 norm
         temp = self.evaluate(*args)
@@ -121,7 +124,7 @@ class nDim_Symbolic_Function:
         except Exception as e:
             print("Error in Symbolic Function module : set_var.")
             PrintException()
-            
+            sys.exit()
 
     def initial_conditions(self, *args):
         try:
@@ -131,7 +134,7 @@ class nDim_Symbolic_Function:
         except Exception as e:
             print("Error in Symbolic Function module : initial_conditions.")
             PrintException()
-            
+            sys.exit()
 
     def get_all_var_as_list(self):
         return [(i,val) for i, val in enumerate(self.vars)]
