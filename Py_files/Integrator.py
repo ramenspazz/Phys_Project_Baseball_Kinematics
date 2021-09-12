@@ -82,23 +82,23 @@ class Integrator:
         except Exception as e:
             PrintException()
 
-    def cleanup(self):
-        sys.stdout.write('cleaning...\n')
-        del self.y_0
-        del self.y_1
-        del self.dy_0
-        del self.dy_1
-        del self.sub_time
-        del self.sim_time
-        del self.dt
-        del self.diff_list
-        del self.scale_factor
-        del self.output_step
-        del self.virtual_range_size
-        del self.force_input
-        del self.trim_
-        sys.stdout.write('Done!\n')
-        return
+    # def cleanup(self):
+    #     sys.stdout.write('cleaning...\n')
+    #     del self.y_0
+    #     del self.y_1
+    #     del self.dy_0
+    #     del self.dy_1
+    #     del self.sub_time
+    #     del self.sim_time
+    #     del self.dt
+    #     del self.diff_list
+    #     del self.scale_factor
+    #     del self.output_step
+    #     del self.virtual_range_size
+    #     del self.force_input
+    #     del self.trim_
+    #     sys.stdout.write('Done!\n')
+    #     return
 
     def sim_and_plot(self, function_select):
         try:
@@ -121,25 +121,9 @@ class Integrator:
 
         except Exception as e:
             PrintException()
-        # finally:
-        #     print('done!')
-        #     return
 
     def __del__(self):
         sys.stdout.write('cleaning...\n')
-        # del self.y_0
-        # del self.y_1
-        # del self.dy_0
-        # del self.dy_1
-        # del self.sub_time
-        # del self.sim_time
-        # del self.dt
-        # del self.diff_list
-        # del self.scale_factor
-        # del self.output_step
-        # del self.virtual_range_size
-        # del self.force_input
-        # del self.trim_
         del self
         sys.stdout.write('Done!\n')
 
@@ -231,7 +215,6 @@ class Integrator:
             # end loop
             # self.out_list[int(self.output_step) - 1,:] = torch.mul(self.scale_factor,self.y_1) # I keep getting weird issues with this line so I commented it
             # out, but in theory it should pose no problems... except for the part where it does
-            self.cleanup()
             return(self.out_list)
         except Exception as e:
             print("Error in Euler_Cromer method!")
