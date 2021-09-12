@@ -15,6 +15,10 @@ import numpy as np
 import torch
 import math
 
+# This line is for debugging purposes, change from ignore to error if you want to try and debug
+# the "dtype=object when creating an array from "ragged" sequence" warning
+np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
+
 # this is a major player in computational speed using c evaluatable lambda functions
 # Without this module, we lose about on the highend, on the order of 100 cpu cycles to return a result fronm python vs c lambdas
 from sympy.utilities.lambdify import lambdastr 
@@ -68,7 +72,7 @@ output_time_step = 1 # second
 # We throw the baseball such that we can see it has proper behavior in 3D, it is thrown at a pi/4 angle from the xy plane and at a pi/4 angle from the xz plane.
 V_mag = 44.7 # m/s <=> 100mph
 theta = np.pi/4
-phi = np.pi/3
+phi = np.pi/4
 Vx = V_mag*np.cos(theta)*np.sin(phi)
 Vy = V_mag*np.sin(theta)*np.sin(phi)
 Vz = V_mag*np.cos(phi)
